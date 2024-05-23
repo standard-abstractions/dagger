@@ -326,6 +326,8 @@ dependencies = [
 [[package]]
 name = "dagger_layout"
 version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6a1266c085ceaafb7b73d4fde518d182274265965164591a54f96d7666ce964b"
 dependencies = [
  "cfg-if",
  "glium",
@@ -336,6 +338,8 @@ dependencies = [
 [[package]]
 name = "dagger_macros"
 version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6759152cca1f0612975b9bafe1079ebfd04d61928e442441ef87874aef0e3c7c"
 dependencies = [
  "proc-macro2",
  "quote",
