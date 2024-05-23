@@ -1,0 +1,20 @@
+[package]
+# Package Meta
+name = "dagger_macros"
+version = "0.1.0"
+description = "A UI layouting library for daggerr."
+keywords = [ "ui", "graphics", "macro", "proc-macro", "dagger" ]
+
+# Rust Meta
+edition = "2021"
+
+# Author Meta
+authors = [ "Thomas Reddy <contact@thomasreddy.com>" ]
+
+[lib]
+proc-macro = true
+
+[dependencies]
+quote = "1.0"
+syn = "2.0"
+proc-macro2 = "1.0"

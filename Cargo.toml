@@ -1,0 +1,28 @@
+[package]
+# Package Meta
+name = "dagger"
+version = "0.1.0"
+description = "A rust UI library."
+keywords = [ "ui", "graphics", "window", "opengl", "dagger" ]
+
+# Rust Meta
+edition = "2021"
+
+# Author Meta
+authors = [ "Thomas Reddy <contact@thomasreddy.com>" ]
+
+[workspace]
+members = [ "dagger_layout" , "dagger_macros"]
+
+[dependencies]
+# Dagger
+dagger_layout = { path = "./dagger_layout", features = [ "glium" ] }
+dagger_macros = { path = "./dagger_macros" }
+
+# Graphics
+glium = "0.34"
+winit = "0.29"
+glutin = "0.31"
+
+# Utility
+vek = "0.17"

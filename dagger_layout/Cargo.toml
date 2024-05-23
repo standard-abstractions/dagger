@@ -1,0 +1,22 @@
+[package]
+# Package Meta
+name = "dagger_layout"
+version = "0.1.0"
+description = "A UI layouting library for daggerr."
+keywords = [ "ui", "graphics", "layout", "layouting", "dagger" ]
+
+# Rust Meta
+edition = "2021"
+
+# Author Meta
+authors = [ "Thomas Reddy <contact@thomasreddy.com>" ]
+
+[dependencies]
+itertools = "0.13"
+vek = "0.17"
+cfg-if = "1.0"
+
+glium = { version = "0.34", optional = true }
+
+[features]
+glium = [ "dep:glium" ]
