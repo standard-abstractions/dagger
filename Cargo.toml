@@ -20,8 +20,8 @@ members = [ "dagger_layout" , "dagger_macros"]
 
 [dependencies]
 # Dagger
-dagger_layout = { path = "./dagger_layout", features = [ "glium" ] }
-dagger_macros = { path = "./dagger_macros" }
+dagger_layout = { version = "0.1", features = [ "glium" ] }
+dagger_macros = "0.1"
 
 # Graphics
 glium = "0.34"
