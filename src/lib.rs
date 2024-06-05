@@ -1,6 +1,9 @@
 pub mod element;
 pub mod window;
 
+pub use dagger_layout as layout;
+pub use dagger_macros as macros;
+
 use dagger_layout::{
 	geometry::Geometry, Layout, SizeCalculationContext
 };
