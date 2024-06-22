@@ -27,6 +27,3 @@ image = "0.25"
 
 # Utility
 vek = "0.17"
-
-[profile.release]
-debug = true
