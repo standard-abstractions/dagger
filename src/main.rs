@@ -61,11 +61,30 @@ where F: Facade {
 	}
 	textures
 }
+
+pub fn gather_images2<F>(facade: &F) -> Vec<ResidentTexture>
+where F: Facade {
+	let mut textures = vec![];
+	for image in FILES {
+		let image = image::io::Reader::new(std::io::Cursor::new(*image)).with_guessed_format().unwrap().decode().unwrap().to_rgba8();
+		let image_dimensions = image.dimensions();
+		let image = glium::texture::RawImage2d::from_raw_rgba(image.into_raw(), image_dimensions);
+
+		let texture = glium::texture::Texture2d::new(facade, image).unwrap().resident().unwrap();
+		textures.push(texture);
+	}
+	textures
+}
 // ABOVE IS PLUTONIUM DO ***NOT*** TOUCH IT
 
 const IMAGE_PATHS: &[&str] = &[
 	"wewritelogo.png",
 	"l.png",
+];
+
+const FILES: &[&[u8]] = &[
+	include_bytes!("../wewritelogo.png"),
+	include_bytes!("../l.png"),
 ];
 
 impl UI {
@@ -84,7 +103,7 @@ impl UI {
 
 	pub fn run(mut self) -> Result<(), EventLoopError> {
 		// Load inital images
-		let mut textures = gather_images(&self.windows[0].glium_display);
+		let mut textures = gather_images2(&self.windows[0].glium_display);
 		let mut uniform_buffer = glium::uniforms::UniformBuffer::<TextureBuffer>::empty_unsized(&self.windows[0].glium_display, textures.len() * 8).unwrap();
 		for (i, element) in uniform_buffer.map().textures.iter_mut().enumerate() {
 			*element = glium::texture::TextureHandle::new(&textures[i], &Default::default());
