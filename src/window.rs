@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 use dagger_layout::{Element, Node};
 
 use winit::{
@@ -50,3 +51,5 @@ impl Window {
 		}
 	}
 }
+=======
+>>>>>>> Stashed changes
