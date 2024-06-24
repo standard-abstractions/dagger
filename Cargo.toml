@@ -16,9 +16,6 @@ authors = [ "Thomas Reddy <contact@thomasreddy.com>" ]
 repository = "https://github.com/standard-abstractions/dagger"
 
 [dependencies]
-# Dagger
-dagger_layout = { path = "/Users/Thomas/Projects/standard-abstractions/dagger_layout", features = [ "glium" ] }
-
 # Graphics
 glium = "0.34"
 winit = "0.29"
@@ -26,4 +23,7 @@ glutin = "0.31"
 image = "0.25"
 
 # Utility
-vek = "0.17"
+serde = { version = "1.0", features = [ "derive" ] }
+serde_json = "1.0"
+vek = { version = "0.17", features = [ "serde", "rgb", "rgba" ] }
+indextree = "4.6"
