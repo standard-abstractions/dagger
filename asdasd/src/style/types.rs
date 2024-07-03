@@ -2,13 +2,13 @@ use crate::*;
 
 pub type Color = vek::Rgba<Abstract>;
 
-#[derive(Clone, Copy, PartialEq, Debug, serde::Deserialize, serde::Serialize)]
-pub enum CornerType { Square, Polygon(u32), Circle }
+#[derive(Clone, Copy, PartialEq, Default, Debug, serde::Deserialize, serde::Serialize)]
+pub enum CornerType { #[default] Square, Polygon(u32), Circle }
 
 #[derive(Clone, Copy, PartialEq, Debug, serde::Deserialize, serde::Serialize)]
 pub enum Alignment { Start, Center, End }
 
-#[derive(Clone, Copy, PartialEq, Debug, serde::Deserialize, serde::Serialize)]
+#[derive(Clone, Copy, PartialEq, Default, Debug, serde::Deserialize, serde::Serialize)]
 pub struct Slice4<T>(Vec4<T>);
 impl<T:> Slice4<T> {
 	pub fn new(north: T, east: T, south: T, west: T) -> Self { Self(Vec4::new(north, east, south, west)) }
@@ -28,6 +28,7 @@ impl<T:> Slice4<T> {
 	pub fn west_east(&self) -> Vec2<&T> { Vec2::new(&self.0.w, &self.0.y) }
 }
 impl<T> From<Vec4<T>> for Slice4<T> { fn from(value: Vec4<T>) -> Self { Self(value) } }
+impl<T: Clone> From<&Vec4<T>> for Slice4<T> { fn from(value: &Vec4<T>) -> Self { Self(value.clone()) } }
 impl<T> std::ops::Deref for Slice4<T> { type Target = Vec4<T>; fn deref(&self) -> &Self::Target { &self.0 } }
 impl<T> std::ops::DerefMut for Slice4<T> { fn deref_mut(&mut self) -> &mut Self::Target { &mut self.0 } }
 
@@ -42,7 +43,7 @@ impl DP {
 		for value in values {
 			match value {
 				Self::Distance(distance) => result += distance,
-				Self::Percent(percent) => result += (percent * (context as Abstract / 100.0)) as Physical,
+				Self::Percent(percent) => result += (percent * (context as Abstract / 100.0)).ceil() as Physical,
 			}
 		}
 		result
@@ -54,7 +55,7 @@ pub type SizeDP = Vec<DP>;
 pub enum DPRA {
 	Distance(Physical),
 	Percent(Abstract),
-	Remaining(Abstract),
+	Remaining(Abstract),	// TODO: make it just `Share`
 	Auto,
 }
 impl DPRA {
@@ -64,7 +65,7 @@ impl DPRA {
 		for value in values {
 			match value {
 				Self::Distance(distance) => result += distance,
-				Self::Percent(percent) => result += (percent * (context.0 as Abstract / 100.0)) as Physical,
+				Self::Percent(percent) => result += (percent * (context.0 as Abstract / 100.0)).ceil() as Physical,
 				Self::Remaining(remaining) => result += (remaining * (context.1 / context.2) as Abstract) as Physical,
 				Self::Auto => result += 0,
 			}

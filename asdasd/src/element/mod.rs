@@ -11,3 +11,7 @@ impl Element {
 		&self.styles.normal
 	}
 }
+
+pub trait Component {
+	fn add<STATE>(self, ui: &mut ui::UI<STATE>);
+}

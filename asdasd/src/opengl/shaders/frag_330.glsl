@@ -3,8 +3,8 @@
 #extension GL_ARB_bindless_texture : require
 
 in vec4 fs_color;
-flat in uvec2 fs_texture_id;
-in vec2 fs_texture_uvs;
+flat in uvec2 fs_background_id;
+in vec2 fs_background_uvs;
 
 out vec4 color;
 
@@ -14,9 +14,9 @@ layout(std430) buffer textures_buffer {
 
 
 void main() {
-	if (fs_texture_id[0] > uint(0)) {
-		sampler2D tex = textures[fs_texture_id[1]];
-		color = fs_color * texture(tex, fs_texture_uvs);
+	if (fs_background_id[0] > uint(0)) {
+		sampler2D tex = textures[fs_background_id[1]];
+		color = fs_color * texture(tex, fs_background_uvs);
 	} else {
 		color = fs_color;
 	}

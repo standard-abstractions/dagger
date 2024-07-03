@@ -2,20 +2,20 @@ use crate::*;
 use super::vertex::*;
 use style::types::*;
 
-#[derive(Clone, Copy, PartialEq, Debug)]
+#[derive(Clone, Copy, PartialEq, Default, Debug)]
 pub struct Geometry {
-	position:			Vec2<Physical>,
-	size:				Vec2<Physical>,
-	color:				Color,
-	background_id:	Option<u32>,
+	pub position:			Vec2<Physical>,
+	pub size:				Vec2<Physical>,
+	pub color:				Color,
+	pub background_id:		Option<u32>,
 
-	corner_size:	Slice4<Physical>,
-	corner_type:	Slice4<CornerType>,
+	pub corner_size:	Slice4<Vec2<Physical>>,
+	pub corner_type:	Slice4<CornerType>,
 
-	edge_border_thickness:		Slice4<Physical>,
-	edge_border_color:			Slice4<Color>,
-	corner_border_thickness:	Slice4<Physical>,
-	corner_border_color:		Slice4<Color>,
+	pub edge_border_thickness:		Slice4<Physical>,
+	pub edge_border_color:			Slice4<Color>,
+	pub corner_border_thickness:	Slice4<Physical>,
+	pub corner_border_color:		Slice4<Color>,
 }
 impl Geometry {
 	pub fn simple_quad_vertices(&self) -> [Vertex;6] {

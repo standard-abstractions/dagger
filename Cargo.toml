@@ -23,7 +23,13 @@ glutin = "0.31"
 image = "0.25"
 
 # Utility
+vek = { version = "0.17", features = [ "serde", "rgb", "rgba" ] }
+
+
+# Serde
 serde = { version = "1.0", features = [ "derive" ] }
 serde_json = "1.0"
-vek = { version = "0.17", features = [ "serde", "rgb", "rgba" ] }
-indextree = "4.6"
+
+[features]
+default = [ "backend_winit_opengl3" ]
+backend_winit_opengl3 = []

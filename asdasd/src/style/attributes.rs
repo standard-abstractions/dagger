@@ -10,6 +10,7 @@ pub struct StyleAttributes {
 	pub minimum_size:		Vec2<SizeDPRA>,
 	pub maximum_size:		Vec2<SizeDPRA>,
 	pub padding:			Slice4<SizeDP>,
+	pub margin:			Slice4<SizeDP>,
 	pub color:				Color,
 	pub background_id:		Option<u32>,
 
@@ -35,14 +36,20 @@ impl StyleAttributes {
 	pub fn with_maximum_width(mut self, maximum_width: SizeDPRA) -> Self { self.maximum_size.x = maximum_width; self }
 	pub fn with_maximum_height(mut self, maximum_height: SizeDPRA) -> Self { self.maximum_size.y = maximum_height; self }
 	pub fn with_padding(mut self, padding: Slice4<SizeDP>) -> Self { self.padding = padding; self }
+	pub fn with_margin(mut self, margin: Slice4<SizeDP>) -> Self { self.margin = margin; self }
 	pub fn with_color(mut self, color: Color) -> Self { self.color = color; self }
 	pub fn with_background_id(mut self, background_id: Option<u32>) -> Self { self.background_id = background_id; self }
+
 	pub fn with_corner_size(mut self, corner_size: Slice4<Vec2<SizeDP>>) -> Self { self.corner_size = corner_size; self }
 	pub fn with_corner_type(mut self, corner_type: Slice4<CornerType>) -> Self { self.corner_type = corner_type; self }
+
 	pub fn with_edge_border_thickness(mut self, edge_border_thickness: Slice4<SizeDP>) -> Self { self.edge_border_thickness = edge_border_thickness; self }
 	pub fn with_edge_border_color(mut self, edge_border_color: Slice4<Color>) -> Self { self.edge_border_color = edge_border_color; self }
 	pub fn with_corner_border_thickness(mut self, corner_border_thickness: Slice4<SizeDP>) -> Self { self.corner_border_thickness = corner_border_thickness; self }
 	pub fn with_corner_border_color(mut self, corner_border_color: Slice4<Color>) -> Self { self.corner_border_color = corner_border_color; self }
+	
+	pub fn with_layout_self(mut self, layout_self: LayoutSelf) -> Self { self.layout_self = layout_self; self }
+	pub fn with_layout_children(mut self, layout_children: LayoutChildren) -> Self { self.layout_children = layout_children; self }
 }
 impl Default for StyleAttributes {
 	fn default() -> Self {
@@ -51,6 +58,7 @@ impl Default for StyleAttributes {
 			minimum_size:		Vec2::new(vec![], vec![]),
 			maximum_size:		Vec2::new(vec![DPRA::Distance(Physical::MAX)], vec![DPRA::Distance(Physical::MAX)]),
 			padding:			Slice4::broadcast(vec![]),
+			margin:			Slice4::broadcast(vec![]),
 			color:				Color::zero(),
 			background_id:		None,
 
