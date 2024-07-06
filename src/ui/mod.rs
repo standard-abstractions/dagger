@@ -5,9 +5,10 @@ use crate::*;
 #[derive(Default, Debug)]
 pub struct UI<State: Default> {
 	input_manager:	input::InputManager,
-	state_manager:	state::StateManager<State>,
+	
+	state:			State,
 
-	elements:		Vec<()>,
+	root:			element::Element,
 }
 
 impl<State: Default> UI<State> {
@@ -22,5 +23,10 @@ impl<State: Default> UI<State> {
 		let backend = backend::Backend::default();
 		backend.run(&mut self)?;
 		Ok(())
+	}
+
+	pub fn root(&mut self, element: element::Element) -> &mut element::Element {
+		self.root = element;
+		&mut self.root
 	}
 }
